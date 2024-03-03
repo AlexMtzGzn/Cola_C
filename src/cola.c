@@ -1,24 +1,16 @@
 #include "cola.h"
 
-struct Nodo *crearNodo()
+struct Nodo *crearNodo(int *elemento)
 {
-    int elemento;
-    printf("Ingresa el elemento de la cola: ");
-    scanf("%i", &elemento);
+    struct Nodo *nodoNuevo = malloc(sizeof(struct Nodo));
 
-    struct Nodo *nodo = malloc(sizeof(struct Nodo));
+    if (nodoNuevo == NULL)
+        return nodoNuevo;
+
+    nodoNuevo->dato = elemento;
+    nodoNuevo->siguiente = NULL;
     
-    if (nodo != NULL)
-    {
-        nodo->dato = elemento;
-        nodo->siguiente = NULL;
-    }
-    else
-    {
-        printf("\nError al asignar memoria al nodo. ");
-    }
-
-    return nodo;
+    return nodoNuevo;
 }
 
 bool esColaVacia(struct Cola *cola)
@@ -26,9 +18,9 @@ bool esColaVacia(struct Cola *cola)
     return cola->inicio == NULL && cola->fin == NULL;
 }
 
-void encolar(struct Cola *cola)
+void encolar(struct Cola *cola,int *elemento)
 {
-    struct Nodo *nodoNuevo = crearNodo();
+    struct Nodo *nodoNuevo = crearNodo(elemento);
 
     if (nodoNuevo != NULL)
     {
@@ -44,13 +36,16 @@ void encolar(struct Cola *cola)
     }
 }
 
-void desencolar(struct Cola *cola){
-    if(!esColaVacia(cola)){
+void desencolar(struct Cola *cola)
+{
+    if (!esColaVacia(cola))
+    {
         struct Nodo *nodoEliminar = cola->inicio;
         cola->inicio = nodoEliminar->siguiente;
         free(nodoEliminar);
 
-        if(cola->inicio == NULL){
+        if (cola->inicio == NULL)
+        {
             cola->fin = cola->inicio = NULL;
         }
     }
@@ -100,7 +95,10 @@ void menu(struct Cola *cola)
         switch (opcion)
         {
         case 1:
-            encolar(cola);
+            int elemento;
+            printf("Ingresa el elemento de la cola: ");
+            scanf("%i", &elemento);
+            encolar(cola,&elemento);
             imprimirCola(cola);
             break;
         case 2:
@@ -112,12 +110,11 @@ void menu(struct Cola *cola)
         case 4:
             break;
         case 5:
-            
-            break;            
+
+            break;
         default:
             printf("\nOpción inválida.");
             break;
         }
     } while (opcion != 3);
-
 }

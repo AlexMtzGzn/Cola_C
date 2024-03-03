@@ -15,9 +15,9 @@ struct Cola{
     struct Nodo *inicio, *fin;
 };
 
-struct Nodo* crearNodo();
+struct Nodo* crearNodo(int *elemento);
 bool esColaVacia(struct Cola *cola);
-void encolar(struct Cola *cola);
+void encolar(struct Cola *cola,int *elemento);
 void desencolar(struct Cola *cola);
 void imprimirCola(struct Cola *cola);
 void menu(struct Cola *cola);
