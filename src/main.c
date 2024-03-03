@@ -7,8 +7,7 @@ int main(void){
     if(cola == NULL)
         return -1;
 
-    cola->inicio = NULL;
-    cola->fin = NULL;
+    cola->inicio = cola->fin = NULL;
 
     menu(cola);
     free(cola);    
