@@ -33,7 +33,8 @@ void encolar(struct Cola *cola,int *elemento)
             cola->fin->siguiente = nodoNuevo;
             cola->fin = nodoNuevo;
         }
-    }
+    }else
+        printf("\nError al asignar memoria");
 }
 
 void desencolar(struct Cola *cola)
